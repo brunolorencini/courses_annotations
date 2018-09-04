@@ -28,13 +28,6 @@ input("Aperte Enter para continuar...")
 # TAREFA 1
 # TODO: Imprima as primeiras 20 linhas usando um loop para identificar os dados.
 print("\n\nTAREFA 1: Imprimindo as primeiras 20 amostras")
-contador = -1
-for i in data_list[:20]:                       # Percorre as 20 primeiras linhas de data_list.
-    contador += 1                              # Contador vai incrementando + 1 adicionando valor a legenda.
-    print("Linha: {}\n{}".format(contador, i)) # Print legenda linha + número linha, e os dados das linhas.
-
-# TAREFA 1
-# Concluida código exibe, linha 0 até 19, as primeiras 20 linhasself.
 
 # Vamos mudar o data_list para remover o cabeçalho dele.
 data_list = data_list[1:]
@@ -47,9 +40,7 @@ input("Aperte Enter para continuar...")
 # TODO: Imprima o `gênero` das primeiras 20 linhas
 
 print("\nTAREFA 2: Imprimindo o gênero das primeiras 20 amostras")
-sample = data_list[:20]                     #Le as primeiras 20 linhas e coloca na variavel sample.
-for gender in sample:                       #Faz a leitura de gneero nas linhas
-    print("Genero: {}".format(gender[-2]))  #Ele printa a coluna genero indicando pelo indice em cada linha.
+
 
 # Ótimo! Nós podemos pegar as linhas(samples) iterando com um for, e as colunas(features) por índices.
 # Mas ainda é difícil pegar uma coluna em uma lista. Exemplo: Lista com todos os gêneros
@@ -57,18 +48,9 @@ for gender in sample:                       #Faz a leitura de gneero nas linhas
 input("Aperte Enter para continuar...")
 # TAREFA 3
 # TODO: Crie uma função para adicionar as colunas(features) de uma lista em outra lista, na mesma ordem
-def column_to_list(data_list, index):
-    """Função realiza a leitura dos dados de cada coluna e adiciona a uma lista.
-    Argumentos:
-    Na lista data_lista: recebendo a lista entrada.
-    index: refere-se ao indice coluna que será lida.
-    Retornando:
-    Lista com valores de uma coluna referencia sendo a  mesma ordem que se encontra na lista inicial.
-    """
+def column_to_list(data, index):
     column_list = []
     # Dica: Você pode usar um for para iterar sobre as amostras, pegar a feature pelo seu índice, e dar append para uma lista
-    for i in data_list:
-        column_list.append(i[index])
     return column_list
 
 
@@ -89,12 +71,6 @@ input("Aperte Enter para continuar...")
 male = 0
 female = 0
 
-for gender in data_list:           # Para diferenciar genero dentro de data_lista.
-    if (gender[-2] == 'Male'):     # Verificamos na coluna de generos se o genero é masculino ou feminino.
-        male += 1                  # Adicionaremos + 1 ao contator de genero referente ao genero incrementado
-    elif(gender[-2] == 'Female'):  # Verifica na coluna de generos se o genero é masculino ou feminino.
-        female += 1                # Adicionaremos + 1 ao contator de genero referente ao genero incrementado.
-
 
 # Verificando o resultado
 print("\nTAREFA 4: Imprimindo quantos masculinos e femininos nós encontramos")
@@ -110,20 +86,10 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
 # Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
 def count_gender(data_list):
-    """Função realizará  contagem dos generos e irá adicionar a uma lista para cada genero.
-    Argumentos:
-    lista data_lista receberá a lista de entrada.
-    Retornando:
-    retornará uma lista com [count_male, count_female].
-    """
     male = 0
     female = 0
-    for gender in data_list:
-        if (gender[-2] == 'Male'):
-            male += 1
-        elif(gender[-2] == 'Female'):
-            female += 1
     return [male, female]
+
 
 print("\nTAREFA 5: Imprimindo o resultado de count_gender")
 print(count_gender(data_list))
@@ -140,23 +106,7 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função que pegue o gênero mais popular, e retorne este gênero como uma string.
 # Esperamos ver "Masculino", "Feminino", ou "Igual" como resposta.
 def most_popular_gender(data_list):
-   """Esta função realizará contagem dos generos, verificando a maiorrecorrencia entre eles.
-    Argumentos:
-    data_list: receberá o argumento que é a lista entrada dos dados.
-    Retornará:
-    retornar answer: responderá qual o genero com maior recorrencia.
-    """
     answer = ""
-    male = count_gender(data_list)[0]
-    female = count_gender(data_list)[1]
-    if male > female:
-        answer = 'Masculino'
-
-    elif female > male:
-        answer = 'Feminino'
-
-    else:
-        answer = 'Iguais'
     return answer
 
 
@@ -185,35 +135,6 @@ input("Aperte Enter para continuar...")
 # TODO: Crie um gráfico similar para user_types. Tenha certeza que a legenda está correta.
 print("\nTAREFA 7: Verifique o gráfico!")
 
-def count_user(data_list):
-"""Função Realizará  contagem de tipos dos usuários e adicionará uma lista para cada tipo distinto.
-Argumentos:
-data_list: lista de entrada.
-Retorna:
-[subscriber, customer]: retornando uma lista com os tipos dos usuários.
-"""
-    subscriber = 0
-    customer = 0
-    for user in data_list:
-        if (user[-3] == 'Subscriber'):
-            subscriber += 1
-        elif(user[-3] == 'Customer'):
-            customer += 1
-    return [subscriber, customer]
-
-
-# Se tudo está rodando como esperado, verifique este gráfico!
-user_list = column_to_list(data_list, -3)
-types = ["Subscriber", "Customer"]
-quantity = count_user(data_list)
-y_pos = list(range(len(types)))
-plt.bar(y_pos, quantity)
-plt.ylabel('Quantidade')
-plt.xlabel('Tipo de Usuário')
-plt.xticks(y_pos, types)
-plt.title('Quantidade por Tipo de Usuário')
-plt.show(block=True)
-
 
 input("Aperte Enter para continuar...")
 # TAREFA 8
@@ -233,29 +154,12 @@ input("Aperte Enter para continuar...")
 # TAREFA 9
 # TODO: Ache a duração de viagem Mínima, Máxima, Média, e Mediana.
 # Você não deve usar funções prontas parTODO isso, como max() e min().
-perc_duration_lista = column_to_list(data_list, 2)
+trip_duration_list = column_to_list(data_list, 2)
 min_trip = 0.
 max_trip = 0.
 mean_trip = 0.
 median_trip = 0.
 
-trip_duration_list_int = []                   # Lista vazia, receberá a lista trip_duration_list convertida para int.
-
-for index in trip_duration_list:              # Loop for que converte cada elemento str da lista trip_duration_list em elementos do tipo int.
-    trip_duration_list_int.append(int(index))
-
-trip_duration_list_sort = sorted(trip_duration_list_int) # Ordena a lista trip_duration_list_int.
-
-min_trip = trip_duration_list_sort[0]    # Cria lista ordenada com seu valor minimo é o seu primeiro elemento.
-max_trip = trip_duration_list_sort[-1]   # Com lista ordenada seu valor máximo é o seu elemento final.
-mean_trip = sum(trip_duration_list_sort)/len(trip_duration_list_sort) # Calculo da média.
-
-# Calcular mediana, elemento central da lista ordenada.
-length_of_list = len(trip_duration_list_sort)
-if length_of_list % 2 == 0:
-    median_trip = (trip_duration_list_sort[int((length_of_list/2)-1)] + trip_duration_list_sort[int((length_of_list/2))])/2
-else:
-    median_trip = trip_duration_list_sort[int(((length_of_list-1)/2))]
 
 print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
 print("Min: ", min_trip, "Max: ", max_trip, "Média: ", mean_trip, "Mediana: ", median_trip)
@@ -271,8 +175,7 @@ input("Aperte Enter para continuar...")
 # TAREFA 10
 # Gênero é fácil porque nós temos apenas algumas opções. E quanto a start_stations? Quantas opções ele tem?
 # TODO: Verifique quantos tipos de start_stations nós temos, usando set()
-start_stations_list = column_to_list(data_list, 3) # Recebendo os dados da coluna start_stations e adicionando-os a uma lista.
-user_types = set(start_stations_list)              # Verificando quantos nomes de estações diferentes estão cadastradas.
+user_types = set()
 
 print("\nTAREFA 10: Imprimindo as start stations:")
 print(len(user_types))
